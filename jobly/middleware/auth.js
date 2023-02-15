@@ -19,7 +19,7 @@ function authenticateJWT(req, res, next) {
   try {
     const authHeader = req.headers && req.headers.authorization;
     if (authHeader) {
-      const token = authHeader.replace(/^[Bb]earer /, "").trim();
+      const token = authHeader && authHeader.split(" ")[1];
       res.locals.user = jwt.verify(token, SECRET_KEY);
     }
     return next();
